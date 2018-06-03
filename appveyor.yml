@@ -1,0 +1,20 @@
+version: 1.0.{build}
+image: Visual Studio 2017 Preview
+before_build:
+- ps: dotnet restore
+environment:
+  EnableNuGetPackageRestore: true
+build:
+  verbosity: detailed
+configuration:
+  - Release
+artifacts:
+- path: bin/Release/
+  name: kasthack.vksharp.generator
+deploy:
+- provider: GitHub
+  auth_token:
+    secure: MfE4qSIr2yoNR8/GUgRVJgaM9jVupDe40JAgb5P/Es/bD6DGzuqkTrHnzpsIFTPH
+  artifact: kasthack.vksharp.generator
+  on:
+    branch: master
